@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom 用于操作DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入babel 用于解析jsx为js -->
+    <script src="../js/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.5.10/prop-types.min.js"></script>
+    <script type="text/babel">
+      /**
+       * 1)姓名必须指定,且为字符串类型
+       * 2)性别不是必须传递的,但是必须为字符串类型,如果没有指定则默认为男
+       * 3)年龄不是必须传递的,但是必须为数字类型,如果年龄没有指定,默认为18
+       */
+      class Person extends React.Component {
+        render() {
+          let { name, age, sex } = this.props
+          return (
+            <ul>
+              <li>姓名:{name}</li>
+              <li>性别:{age}</li>
+              <li>年龄:{sex}</li>
+            </ul>
+          )
+        }
+      }
+
+      Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number,
+        sex: PropTypes.string,
+      }
+      Person.defaultProps = {
+        age: 18,
+        sex: "阿萨德",
+      }
+      // 限制标签传递属性时的必要性,类型
+
+      ReactDOM.render(
+        <Person name="kobe" age={18} sex="男" />,
+        document.getElementById("example1")
+      )
+      ReactDOM.render(<Person />, document.getElementById("example2"))
+    </script>
+  </body>
+</html>
