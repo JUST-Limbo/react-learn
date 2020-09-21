@@ -24,10 +24,19 @@
      * 3.点击按钮从界面中移除组件界面(当前组件在页面上消失)
      */
     class Life extends React.Component {
+      constructor(a) {
+        super(a)
+        console.log('constructor');
+      }
       state = {
         opacity: 1
       }
-        setInterval(() => {
+      componentWillMount() { }
+
+      // 重写从父类继承过来的componentDidMount
+      // 一般会在componentDidMount里1.开定时器2.发送异步ajax请求
+      componentDidMount() {
+        this.timeId = setInterval(() => {
           let { opacity } = this.state
           opacity -= 0.1
           if (opacity <= 0) {
@@ -37,11 +46,30 @@
             opacity: opacity
           })
         }, 200)
+      }
+
+      componentWillUpdate() { }
+
+      componentDidUpdate() { }
+
+      // 一般在componentWillUnmount里做一些收尾性工作
+      componentWillUnmount() {
+        clearInterval(this.timeId)
+      }
+
+      shouldComponentUpdate() {
+        // return false
+        return true
+      }
+
+      death = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
       render() {
         return (
           <div>
             <h1 style={{ opacity: this.state.opacity, width: '10px' }}>React学不会怎么办</h1>
-            <button>不活了</button>
+            <button onClick={this.death}>不活了</button>
           </div>
         )
       }
