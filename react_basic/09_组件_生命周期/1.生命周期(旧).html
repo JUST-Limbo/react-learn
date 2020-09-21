@@ -16,7 +16,38 @@
   <!-- 引入babel 用于解析jsx为js -->
   <script src="../js/babel.min.js"></script>
 
-  <script type="text/babel"></script>
+  <script type="text/babel">
+    /**
+     * 需求:自定义组件
+     * 1.让指定文本做显示/隐藏的动画
+     * 2.切换时间为2s
+     * 3.点击按钮从界面中移除组件界面(当前组件在页面上消失)
+     */
+    class Life extends React.Component {
+      state = {
+        opacity: 1
+      }
+        setInterval(() => {
+          let { opacity } = this.state
+          opacity -= 0.1
+          if (opacity <= 0) {
+            opacity = 1
+          }
+          this.setState({
+            opacity: opacity
+          })
+        }, 200)
+      render() {
+        return (
+          <div>
+            <h1 style={{ opacity: this.state.opacity, width: '10px' }}>React学不会怎么办</h1>
+            <button>不活了</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Life />, document.getElementById('test'))
+  </script>
 </body>
 
 </html>
