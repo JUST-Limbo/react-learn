@@ -17,6 +17,22 @@
   <script src="../js/babel.min.js"></script>
 
   <script type="text/babel">
+    /*
+      1.[初始化]
+      触发条件:ReactDOM.render(<???/>)
+      constructor()
+      componentWillMount()
+      render():提供虚拟DOM,可能会调用多次(1+n)
+      componentDidMount():启动定时器,发送ajax请求,只执行一次
+      2.[更新]
+      触发条件:this.setState({})
+      componentWillUpdate()
+      render()
+      componentDidUpdate()
+      3.[卸载]
+      触发条件:ReactDOM.unmountComponentAtNode()
+      componentWillUnmount():收尾工作
+    */
     /**
      * 需求:自定义组件
      * 1.让指定文本做显示/隐藏的动画
