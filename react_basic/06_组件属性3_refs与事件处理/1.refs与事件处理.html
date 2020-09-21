@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="example"></div>
+  <!-- 引入react核心库 -->
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <!-- 引入react-dom 用于操作DOM -->
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <!-- 引入babel 用于解析jsx为js -->
+  <script src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    class MyComponent extends React.Component {
+      clickHandle = () => {
+        alert(this.refs.input1.value)
+      }
+      blurHandle = (e) => {
+        // alert(this.refs.input2.value)
+        alert(e.target.value)
+      }
+      render() {
+        return (
+          <div>
+            <input type="text" ref="input1" />&nbsp;
+            <button onClick={this.clickHandle}>点我提示数据</button>
+            <input type="text" ref="input2" placeholder="失去焦点提示" onBlur={this.blurHandle} />
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<MyComponent />, document.getElementById('example'))
+  </script>
+</body>
+
+</html>
