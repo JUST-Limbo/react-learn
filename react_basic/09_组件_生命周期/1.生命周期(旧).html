@@ -52,16 +52,16 @@
       // 重写从父类继承过来的componentDidMount
       // 一般会在componentDidMount里1.开定时器2.发送异步ajax请求
       componentDidMount() {
-        this.timeId = setInterval(() => {
-          let { opacity } = this.state
-          opacity -= 0.1
-          if (opacity <= 0) {
-            opacity = 1
-          }
-          this.setState({
-            opacity: opacity
-          })
-        }, 200)
+        // this.timeId = setInterval(() => {
+        //   let { opacity } = this.state
+        //   opacity -= 0.1
+        //   if (opacity <= 0) {
+        //     opacity = 1
+        //   }
+        //   this.setState({
+        //     opacity: opacity
+        //   })
+        // }, 200)
       }
 
       componentWillUpdate() { }
@@ -81,11 +81,15 @@
       death = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById('test'))
       }
+      demo = () => {
+        this.forceUpdate()
+      }
       render() {
         return (
           <div>
-            <h1 style={{ opacity: this.state.opacity, width: '10px' }}>React学不会怎么办</h1>
+            <h1 style={{ opacity: this.state.opacity, width: '100px' }}>React学不会怎么办</h1>
             <button onClick={this.death}>不活了</button>
+            <button onClick={this.demo}>强制更新</button>
           </div>
         )
       }
